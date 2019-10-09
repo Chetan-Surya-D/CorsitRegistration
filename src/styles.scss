@@ -1,1 +1,166 @@
 /* You can add global styles to this file, and also import other style files */
+$textColor: rgba(250, 250, 250, 1);
+$bgColor: rgba(20, 20, 20, 0.6);
+$secondaryColor: rgb(255, 201, 22);
+
+
+.bgStyle{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  //width: 300px;
+  margin: 50px auto;
+  border-radius: 30px;
+  background-color: $bgColor;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.5), 0 17px 50px 0 rgba(0,0,0,0.3);
+
+  h3{
+    color: $secondaryColor;
+  }
+}
+
+.button {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+
+  width:90px;
+  //margin-left: 80px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: $textColor;
+  border: 3px solid $secondaryColor ;
+  padding: 2px;
+  color: $secondaryColor;
+  font-size: 125%;
+  font-weight: bolder;
+  border-radius: 10px;
+  &:hover {
+    color: $textColor;
+    background-color: $secondaryColor;
+    width: 100px;
+    padding: 5px;
+    //margin-left: 75px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.759);
+    transition: 0.25s;
+  }
+  &:active {
+    transition: .25s;
+    box-shadow: 0 5px #111;
+    transform: translateY(4px);
+  }
+}
+
+.test {
+  position: relative;
+  color: $textColor;
+  background-color: transparent;
+
+  input, select {
+    font-size:125%;
+    /* margin-left: 30px;
+    margin-bottom: 8px;
+    margin-top: 5px;   */
+    width: 90%;
+    margin: 5px auto;
+    border: none;
+    color: $textColor;
+    align-content: center;
+    background-color: transparent;
+    border-bottom: 1px solid $textColor;
+
+    &:focus {
+      outline: none;
+      border: 0px;
+      border-bottom: 2px solid $secondaryColor;
+    }
+  }
+
+  input:focus ~label,
+  select:focus ~ label,
+  input.ng-valid ~ label,
+  select.ng-valid ~ label{
+    color: $secondaryColor;
+    top: -55px;
+    font-size: 85%;
+    transition: 0.75s;
+  }
+
+  input.ng-valid, select.ng-valid {
+    border-bottom: 2px solid $secondaryColor;
+  }
+
+  textarea{
+    background-color: transparent;
+    border: none;
+    width: 90%;
+    border-bottom: 1px solid $textColor;
+    color: $textColor;
+  }
+
+  textarea:focus,
+  textarea.ng-valid{
+    outline: none;
+    border-bottom: 1px solid $secondaryColor;
+  }
+
+  label{
+    font-size: 125%;
+    position: relative;
+    top: -35px;
+    color: $textColor;
+    /* margin-left: 30px;   */
+    pointer-events: none;
+  }
+
+  p,span{
+    position: relative;
+    color: red;
+  }
+
+  p{
+    margin-left: 30px;
+    top: -35px;
+    animation-name: disp;
+    animation-duration: 0.750s;
+  }
+}
+
+
+@-webkit-keyframes disp{
+  from{
+    opacity: 0;
+    top: -65px;
+  }
+  to{
+    opacity: 1;
+    top: -35px;
+  }
+}
+
+@keyframes disp{
+  from{
+    opacity: 0;
+    top: -65px;
+  }
+  to{
+    opacity: 1;
+    top: -35px;
+  }
+}
+
+a{
+  /* margin-left: 95px; */
+  color: $secondaryColor;
+  /* font-size: 125%; */
+  /* font-weight: bold; */
+}
+
+a:hover{
+  text-decoration: none;
+  color: aqua;
+  transition: 0.75s;
+}
