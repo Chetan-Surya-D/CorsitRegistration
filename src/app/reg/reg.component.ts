@@ -57,7 +57,7 @@ export class RegComponent implements OnInit {
         billImg: this.selectedFile
       };
       // console.log(record)
-      this.http.post('http://localhost:1025/reg/register', reg).subscribe((response: any) => {
+      this.http.post('https://corsit-registration.herokuapp.com/reg/register', reg).subscribe((response: any) => {
         console.log('recieved response');
         if (response.status === 'success') {
           this.stext = 'successfully registered';
