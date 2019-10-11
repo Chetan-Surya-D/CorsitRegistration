@@ -47,7 +47,9 @@ export class RegComponent implements OnInit {
       this.http.post('https://corsit-registration.herokuapp.com/reg/register', reg).subscribe((response: any) => {
         console.log('recieved response');
         if (response.status === 'success') {
-          this.http.post('https://corsit-registration.herokuapp.com/reg/fileUpload', formData).subscribe((response: any) => {})
+          this.http.post('https://corsit-registration.herokuapp.com/reg/fileUpload', formData).subscribe((response: any) => {
+            console.log(response)
+          })
           this.stext = 'successfully registered';
           this.etext = '';
         } else if (response.status === 'fail') {
