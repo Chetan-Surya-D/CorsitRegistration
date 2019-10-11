@@ -13,7 +13,6 @@ export class RegComponent implements OnInit {
   etext: string;
   stext: string;
   selectedFile = null;
-  selectedFile2 = null;
   constructor(private http: HttpClient,
               private activatedRoute: ActivatedRoute) { }
 
@@ -21,59 +20,47 @@ export class RegComponent implements OnInit {
   }
 
   preview(event) {
-    this.handleFileSelect(event);
+    this.selectedFile = <File>event.target.files[0];
     let reader = new FileReader();
     reader.onload = function(e: any) {
       document.getElementById("img1").setAttribute('src', e.target.result);
     }
     reader.readAsDataURL(event.target.files[0]);
-  }
-
-  handleFileSelect(evt) {
-    var files = evt.target.files;
-    var file = files[0];
-    if (files && file) {
-      var reader = new FileReader();
-      reader.onload =this._handleReaderLoaded.bind(this);
-      reader.readAsBinaryString(file);
-    }
-  }
-
-  _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.selectedFile = btoa(binaryString);  // Converting binary string data.
-    console.log(this.selectedFile);
+    const formData = new FormData();
+    formData.append('file', this.selectedFile, this.selectedFile.filename)
   }
 
   create(record: NgForm) {
     // console.log(record.value);
     if (record.value.name != null && record.value.teamName != null && record.value.email != null && record.value.contact != null && record.value.usn != null && this.selectedFile != null) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile)
       var reg = {
         name: record.value.name,
         teamName: record.value.teamName,
         stdEmail: record.value.email,
         contact: record.value.contact,
         usn: record.value.usn,
-        billImg: this.selectedFile
+        billImg: formData
       };
-      // console.log(record)
+      console.log(record)
       this.http.post('https://corsit-registration.herokuapp.com/reg/register', reg).subscribe((response: any) => {
         console.log('recieved response');
         if (response.status === 'success') {
+          this.http.post('https://corsit-registration.herokuapp.com/reg/fileUpload', formData).subscribe((response: any) => {})
           this.stext = 'successfully registered';
           this.etext = '';
         } else if (response.status === 'fail') {
           this.etext = 'This USN is already registered you may want to edit the details';
           this.stext = '';
+        } else {
+          this.etext = "There is problem uploading the file please try again";
+          this.stext = "";
         }
       });
     } else {
       this.etext = "One or more fields are empty";
       this.stext = "";
     }
-  }
-
-  test() {
-    this.selectedFile2 = "data:image/jpeg;base64," + this.selectedFile;
   }
 }
