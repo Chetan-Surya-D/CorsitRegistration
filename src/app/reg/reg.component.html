@@ -38,7 +38,7 @@
     <br>
 
     <div style="display: none">
-      <input type="file" accept="image/jpg" (change)="preview($event)" #upload>
+      <input type="file" accept="image/*" (change)="preview($event)" #upload>
     </div>
     <div  align="center"><button class="button" style="width: 150px" (click)="upload.click()">Upload Image</button></div>
     <br>
