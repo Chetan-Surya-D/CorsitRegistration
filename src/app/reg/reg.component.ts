@@ -26,8 +26,6 @@ export class RegComponent implements OnInit {
       document.getElementById("img1").setAttribute('src', e.target.result);
     }
     reader.readAsDataURL(event.target.files[0]);
-    const formData = new FormData();
-    formData.append('file', this.selectedFile, this.selectedFile.filename)
   }
 
   create(record: NgForm) {
@@ -40,14 +38,13 @@ export class RegComponent implements OnInit {
         teamName: record.value.teamName,
         stdEmail: record.value.email,
         contact: record.value.contact,
-        usn: record.value.usn,
-        billImg: formData
+        usn: record.value.usn
       };
       console.log(record)
-      this.http.post('https://corsit-registration-git.herokuapp.com/reg/register', reg).subscribe((response: any) => {
+      this.http.post('https://corsit-registration-git.heroku.com/reg/register', reg).subscribe((response: any) => {
         console.log('recieved response');
         if (response.status === 'success') {
-          this.http.post('https://corsit-registration-git.herokuapp.com//reg/fileUpload', formData).subscribe((response: any) => {
+          this.http.post('https://corsit-registration-git.heroku.com/reg/fileUpload', formData).subscribe((response: any) => {
             console.log(response)
           })
           this.stext = 'successfully registered';
